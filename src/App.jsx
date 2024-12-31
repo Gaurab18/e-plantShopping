@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import ProductList from './ProductList';
 import './App.css';
 import AboutUs from './AboutUs';
@@ -11,6 +12,10 @@ function App() {
   const handleGetStartedClick = () => {
     setShowProductList(true);
   };
+
+  // const handleBackToLanding = () => {
+  //   setShowProductList(false);
+  // };
 
   return (
     <div className="app-container">

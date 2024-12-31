@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  items: [],
+  items: [
+    // { name: 'Plant Name', cost: 15, quantity: 1 }, // Ensure cost is always present
+  ],
 };
+
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -14,18 +17,25 @@ const cartSlice = createSlice({
         existingItem.quantity += action.payload.quantity; // Increment quantity
       } else {
         state.items.push(action.payload); // Add new item with quantity
+        console.log('Added new item:', action.payload);
       }
     },
        
     removeItem: (state, action) => {
-      state.items = state.items.filter(item => item.name !== action.payload);
+      // if (action.payload) {
+        state.items = state.items.filter(item => item.name !== action.payload);
+        console.log('Removed item:', action.payload);
+        console.log('Current state items:', state.items);
+      // }
     },
     updateQuantity: (state, action) => {
       const { name, quantity } = action.payload;
       const item = state.items.find(item => item.name === name);
       if (item) {
         item.quantity = quantity;
+        console.log('Updated item quantity:', item);
       }
+      console.log('Current state items:', state.items);
     },
     //extra
     incrementQuantity: (state, action) => {
@@ -33,6 +43,7 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity += 1;
       }
+      console.log('Incremented item quantity:', item);
     },
     decrementQuantity: (state, action) => {
       const item = state.items.find((item) => item.name === action.payload);
